@@ -1,6 +1,6 @@
 #include <iostream>
 
 int main() {
-    std::cout << "C++ virker i VS Code!" << std::endl;
+    std::cout << "Hello World" << std::endl;
     return 0;
 }
