@@ -15,7 +15,7 @@ int main(){
     std::cout << "e^π =" << c << std::endl;
     std::cout << "π^e =" << d << std::endl;
 
-
+    
     return 0;
 }
 
