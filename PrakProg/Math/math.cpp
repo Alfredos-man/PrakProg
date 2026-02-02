@@ -6,7 +6,7 @@
 int main(){
 
     double a = std::sqrt(2.0);
-    double b = std::pow(2 , 1/5);
+    double b = std::pow(2 , 0.2);
     double c = std::exp(std::numbers::pi);
     double d = std::pow(std::numbers::pi, std::numbers::e);
 
@@ -15,7 +15,11 @@ int main(){
     std::cout << "e^π =" << c << std::endl;
     std::cout << "π^e =" << d << std::endl;
 
-    
+    for(double i = 1; i <= 10; i++){
+        std::cout << "for x = " << i << " : " << sfuns::fgamma(i) << std::endl;
+
+    }
+
     return 0;
 }
 

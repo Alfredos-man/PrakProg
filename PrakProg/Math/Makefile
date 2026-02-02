@@ -1,13 +1,17 @@
 CXXFLAGS = -Wall -Wextra -Werror -std=c++23 -O
-LINK.o = $(CXX) $(LDFLAGS) -o 
+#LINK.o = $(CXX) $(LDFLAGS) -o 
 LDLIBS += -lstdc++ -lm
+CXX = clang++
 
+Out.txt : math
+	./math > Out.txt
+	cat Out.txt
 
-Out.txt : math             
-	./math > Out.txt   
+math : math.o sfuns.o
+	$(CXX) $(LDLIBS) -o math math.o sfuns.o
 
-cpptest: math.cpp             
-	clang++ -o main main.cpp  
+math.o : math.cpp 
+	$(CXX) $(CXXFLAGS) -c math.cpp -o math.o
 
-clean:
-	rm -f Out.txt math
+clean : 
+	rm math math.o sfuns.o 
