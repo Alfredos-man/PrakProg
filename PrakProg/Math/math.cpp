@@ -15,9 +15,8 @@ int main(){
     std::cout << "e^π =" << c << std::endl;
     std::cout << "π^e =" << d << std::endl;
 
-    for(double i = 1; i <= 10; i++){
+    for(int i = 1; i <= 10; i++){  //nu tager gamma funktionen int, kan den dette fordi int også kan skrives som doubles? 
         std::cout << "for x = " << i << " : " << sfuns::fgamma(i) << std::endl;
-
     }
 
     return 0;

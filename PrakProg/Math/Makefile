@@ -1,7 +1,7 @@
 CXXFLAGS = -Wall -Wextra -Werror -std=c++23 -O
 #LINK.o = $(CXX) $(LDFLAGS) -o 
 LDLIBS += -lstdc++ -lm
-CXX = clang++
+CXX = clang++ #bruger clang++ compileren. 
 
 Out.txt : math
 	./math > Out.txt
