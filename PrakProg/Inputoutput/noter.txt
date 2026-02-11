@@ -1,0 +1,2 @@
+har lavet opgave 1, mangler opgave 2 og 3 
+ved stadig ikke om jeg skal lave opgaverne først, og så køre dem allesammen i en ekelt main, eller om jeg bare skal lave 3 main og 3 makefiles
