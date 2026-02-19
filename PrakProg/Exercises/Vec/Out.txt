@@ -1,3 +1,6 @@
+init vektor 1
 X,Y,Z: 1, 2, 3
+init vektor 1
 X,Y,Z: 3, 2, 1
+plus dem sammen
 X,Y,Z: 4, 4, 4

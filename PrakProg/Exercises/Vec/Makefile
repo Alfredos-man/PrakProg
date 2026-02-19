@@ -17,4 +17,4 @@ vec.o: vec.cpp vec.h
 	$(CXX) $(CXXFLAGS) -c vec.cpp -o vec.o
 
 clean:
-	rm -f $(TARGET) $(TARGET).o vec.o Out.txt
+	rm -f $(TARGET) $(TARGET).o vec.o
