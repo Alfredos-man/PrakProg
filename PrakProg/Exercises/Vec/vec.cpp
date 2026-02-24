@@ -1,4 +1,4 @@
-#include<iostream>
+#include<iostreamgit push>
 #include "vec.h"
 
 vec::vec(double xval, double yval, double zval)
@@ -15,7 +15,26 @@ vec& vec::operator+=(const vec& other) {
     return *this;
 }
 
-vec vecPlus(vec a, const vec& b) {
+vec& vec::operator-=(const vec& other) {
+    x -= other.x;
+    y -= other.y;
+    z -= other.z;
+    return *this;
+}
+
+vec& vec::operator*=(double skalar) {
+    x * skalar;
+    y * skalar;
+    z * skalar;
+    return *this;
+}
+
+vec vecPlus(vec a, const vec& b){
     a += b;
     return a;
+}
+
+vec dot(vec a, const vec& b){
+
+
 }

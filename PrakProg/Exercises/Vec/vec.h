@@ -11,8 +11,12 @@ public:
 
     void printVec() const;
     vec& operator+=(const vec& other);
+    vec& operator-=(const vec& other);
+    vec& operator*=(double skalar);
+
 };
 
 vec vecPlus(vec a, const vec& b);
+vec dot(vec a, const vec& b);
 
 #endif
