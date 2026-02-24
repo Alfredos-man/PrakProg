@@ -1,11 +1,17 @@
-CXXFLAGS += -std=c++23 -Wall -Wextra #-DLONG_DOUBLE
-LDLIBS += -lstdc++ -lm
+CXX      = c++
+CXXFLAGS = -std=c++23 -Wall -Wextra -O2
+OBJS = main.o QR.o
 
-Out.txt:main ; ./$< > $@
-main.o:matrix.h
+
+Out.txt: main
+	./main > Out.txt
+	cat Out.txt
+
+main: $(OBJS)
+	$(CXX) $(CXXFLAGS) -o $@ $(OBJS)
+
+main.o: main.cc matrix.h QR.h
+QR.o: QR.cc QR.h matrix.h
+
 clean:
-	$(RM) [Oo]ut* main *.o
-test:
-	echo $(findstring clang++,$(CXX)) 
-	echo $(CXX)
-	echo $(CXXFLAGS)
+	rm -f main *.o
