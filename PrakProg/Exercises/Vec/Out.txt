@@ -4,3 +4,7 @@ init vektor 1
 X,Y,Z: 3, 2, 1
 plus dem sammen
 X,Y,Z: 4, 4, 4
+overloaded std::cout med vektore:
+vektor 1: (1, 2, 3)
+vektor 2: (3, 2, 1)
+plusset sammen vektor: (4, 4, 4)

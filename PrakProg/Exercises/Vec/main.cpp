@@ -15,4 +15,12 @@ int main(){
         vec sumvec = vecPlus(v1, v2);
         sumvec.printVec();
         
+
+
+        //Med overloadet std::cout
+        std::cout << "overloaded std::cout med vektore:" << std::endl;
+        std::cout << "vektor 1: " << v1 << std::endl;
+        std::cout << "vektor 2: " << v2 << std::endl;
+        std::cout << "plusset sammen vektor: " << sumvec << std::endl;
+
     }

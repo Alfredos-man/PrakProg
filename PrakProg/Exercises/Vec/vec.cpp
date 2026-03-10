@@ -1,4 +1,4 @@
-#include<iostreamgit push>
+#include<iostream>
 #include "vec.h"
 
 vec::vec(double xval, double yval, double zval)
@@ -23,9 +23,9 @@ vec& vec::operator-=(const vec& other) {
 }
 
 vec& vec::operator*=(double skalar) {
-    x * skalar;
-    y * skalar;
-    z * skalar;
+    x *= skalar;
+    y *= skalar;
+    z *= skalar;
     return *this;
 }
 
@@ -34,7 +34,11 @@ vec vecPlus(vec a, const vec& b){
     return a;
 }
 
-vec dot(vec a, const vec& b){
+double dot(const vec& a, const vec& b) {
+    return a.x * b.x + a.y * b.y + a.z * b.z;
+}
 
-
+std::ostream& operator<<(std::ostream& os, const vec& v) {
+    os << "(" << v.x << ", " << v.y << ", " << v.z << ")";
+    return os;
 }

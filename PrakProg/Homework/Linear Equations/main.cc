@@ -5,9 +5,12 @@
 
 using namespace la;
 
+
+//helper funktioner:
+
 static double rnd() {
     static std::mt19937 gen(123);
-    static std::uniform_real_distribution<double> dist(-1.0, 1.0);
+    static std::uniform_int_distribution<int> dist(-2, 5);
     return dist(gen);
 }
 
@@ -34,8 +37,16 @@ int main() {
         for (int j = 0; j < m; j++)
             A(i,j) = rnd();
 
+    //printer matrix
     A.print();
+
+    //tjek de forskellige ting
+    QR qr(A);
+
     
+    
+    
+
 
     return 0;
 }

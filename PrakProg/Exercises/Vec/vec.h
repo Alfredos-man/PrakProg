@@ -2,7 +2,7 @@
 #define VEC_H
 
 class vec {
-private:
+public:
     double x{}, y{}, z{};
 
 public:
@@ -14,9 +14,15 @@ public:
     vec& operator-=(const vec& other);
     vec& operator*=(double skalar);
 
+    friend std::ostream& operator<<(std::ostream& os, const vec& v);
+
 };
 
 vec vecPlus(vec a, const vec& b);
 vec dot(vec a, const vec& b);
+
+
+
+
 
 #endif
