@@ -1,20 +1,29 @@
-CXX = clang++
-CXXFLAGS = -std=c++17 -Wall -Wextra -pedantic
-TARGET = plots.cpp
+CXXFLAGS += -Wall -std=c++23
+LDLIBS += -lstdc++ -lm
 
-SRC = main.cpp plots.cpp
-OBJ = $(SRC:.cpp=.o)
+all: fig1.svg fig2.svg fig3.svg
 
-all: $(TARGET)
+fig1.svg: fig1.gnu erf.data erf_table.data
+	gnuplot $<
 
-$(TARGET): $(OBJ)
-	$(CXX) $(CXXFLAGS) -o $(TARGET) $(OBJ)
+fig2.svg: fig2.gnu gamma.data gamma_table.data
+	gnuplot $<
 
-main.o: main.cpp plots.h
-erf.o: plots.cpp plots.h
+fig3.svg: fig3.gnu lngamma.data lngamma_table.data
+	gnuplot $<
 
-%.o: %.cpp
-	$(CXX) $(CXXFLAGS) -c $<
+main: main.cpp funcs.cpp
+	$(CXX) $(CXXFLAGS) -o $@ main.cpp funcs.cpp $(LDLIBS)
 
+erf.data: main Makefile
+	./main > $@
+
+gamma.data: main Makefile
+	./main -xmin 0 -xmax 3 > $@
+
+lngamma.data: main Makefile
+	./main -xmin 0 -xmax 3 -log > $@
+
+.PHONY: clean
 clean:
-	rm -f $(OBJ) $(TARGET)
+	rm -f main erf.data gamma.data lngamma.data fig1.svg fig2.svg fig3.svg
