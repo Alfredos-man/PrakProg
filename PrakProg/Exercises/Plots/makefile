@@ -26,4 +26,4 @@ lngamma.data: main Makefile
 
 .PHONY: clean
 clean:
-	rm -f main erf.data gamma.data lngamma.data fig1.svg fig2.svg fig3.svg
+	rm -f main erf.data gamma.data lngamma.data fig1.png fig2.png fig3.png

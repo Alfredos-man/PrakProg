@@ -1,5 +1,8 @@
+#pragma once
 #ifndef VEC_H
 #define VEC_H
+
+
 
 class vec {
 public:
@@ -19,7 +22,7 @@ public:
 };
 
 vec vecPlus(vec a, const vec& b);
-vec dot(vec a, const vec& b);
+double dot(vec a, const vec& b);
 
 
 

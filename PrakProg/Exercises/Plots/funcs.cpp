@@ -1,14 +1,12 @@
-#include <iostream>
-#include<cmath>
-#include<string>
-#include<iomanip>
-#include<vector>
-#include<limits>
-#include<numbers>
+#include "funcs.h"
+#include <cmath>
+#include <limits>
+#include <numbers>
+#include <vector>
 
 double PI = std::numbers::pi;
 
-double erf(double x){
+double myerf(double x){
 if(x<0) return -erf(-x);
 std::vector<double> a {0.254829592,-0.284496736,1.421413741,-1.453152027,1.061405429};
 double t=1/(1+0.3275911*x);

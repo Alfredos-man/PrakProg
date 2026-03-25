@@ -34,7 +34,7 @@ vec vecPlus(vec a, const vec& b){
     return a;
 }
 
-double dot(const vec& a, const vec& b) {
+double dot(vec a, const vec& b) {
     return a.x * b.x + a.y * b.y + a.z * b.z;
 }
 
