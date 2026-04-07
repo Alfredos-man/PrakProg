@@ -1,0 +1,12 @@
+init vektor 1
+X,Y,Z: 1.6, 2.3, 3.2
+init vektor 1
+X,Y,Z: 3.1, 2.1, 1.2
+plus dem sammen
+X,Y,Z: 4.7, 4.4, 4.4
+dot prod
+13.63
+overloaded std::cout med vektore:
+vektor 1: (1.6, 2.3, 3.2)
+vektor 2: (3.1, 2.1, 1.2)
+plusset sammen vektor: (4.7, 4.4, 4.4)
