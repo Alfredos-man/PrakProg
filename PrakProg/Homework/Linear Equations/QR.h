@@ -12,7 +12,13 @@ struct QR {
     
     Vector solve(const Vector& b) const;
 
+    
+
     double det() const;
+
+    //getter metoder:
+    const Matrix& getQ() const;
+    const Matrix& getR() const;
 };
 
 }

@@ -51,6 +51,18 @@ struct Vector {
         for (double& x : a) x /= s;
         return *this;
     }
+
+    void print_vector() const {
+    double eps = 1e-12;
+    std::cout << "[ ";
+    for (int i = 0; i < size(); ++i) {
+        double x = a[i];
+        if (std::abs(x) < eps) x = 0.0;
+        std::cout << x << " ";
+    }
+    std::cout << "]\n";
+}
+
 };
 
 inline Vector operator+(Vector v, const Vector& w) { return v += w; }
@@ -94,9 +106,12 @@ struct Matrix {
 
     void print() const {
     std::cout<<"Start"<<std::endl;
+    double eps = 1e-12;
     for(int i = 0; i < rows(); ++i){
         for(int j = 0; j < cols(); ++j){
-            std::cout << std::setw(10) << (*this)(i,j) << " ";
+            double x = (*this)(i,j);
+            if (std::abs(x) < eps) x = 0.0; //sikre at der ikke kommer bitte små tal fra epsilon fejl. 
+            std::cout << std::setw(10) << x << " ";
         }
         std::cout << "\n";
     }

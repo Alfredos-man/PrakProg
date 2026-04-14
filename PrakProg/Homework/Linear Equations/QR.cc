@@ -73,4 +73,11 @@ double QR::det() const {
     return d;
 }
 
+const Matrix& QR::getQ() const {
+    return Q;
+}
+
+const Matrix& QR::getR() const {
+    return R;
+}
 } // namespace la
