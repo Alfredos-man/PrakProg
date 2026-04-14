@@ -1,0 +1,18 @@
+Terms: 100000000000
+Threads: 1
+Total sum = 25.9057
+Terms: 100000000000
+Threads: 2
+Total sum = 25.9057
+Terms: 100000000000
+Threads: 4
+Total sum = 25.9057
+Terms: 100000000000
+Threads: 8
+Total sum = 25.9057
+Terms: 100000000000
+Threads: 16
+Total sum = 25.9057
+Terms: 100000000000
+Threads: 32
+Total sum = 25.9057

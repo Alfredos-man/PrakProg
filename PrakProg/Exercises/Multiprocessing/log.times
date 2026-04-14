@@ -1,0 +1,1 @@
+	set terminal png ;	set output "times.png" ;	set xlabel "Threads" ;	set ylabel "time (real time)" ;	set title "Computation, N = 100000000000 terms" ;	a = 1; b = 10 ;	f(x) = a + b/x ;	fit f(x) "out.times" using 1:2 via a,b ;	plot 		"out.times" using 1:2 with linespoints title "times", 		f(x) title "fit a + b/x", 		b/x title "1/x scaled" ;	
