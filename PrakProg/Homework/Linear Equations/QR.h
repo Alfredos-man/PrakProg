@@ -12,7 +12,7 @@ struct QR {
     
     Vector solve(const Vector& b) const;
 
-    
+    Matrix inverse() const; 
 
     double det() const;
 

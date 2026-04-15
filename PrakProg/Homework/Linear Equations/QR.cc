@@ -73,6 +73,27 @@ double QR::det() const {
     return d;
 }
 
+Matrix QR::inverse() const {
+    if (Q.rows() != Q.cols())
+        throw std::invalid_argument("QR::inverse: only for square matrices");
+
+    int n = Q.rows();
+    Matrix Ainv(n, n);
+
+    for (int i = 0; i < n; ++i) {
+        Vector e(n);
+        e[i] = 1.0;   // standard basis vector
+
+        Vector x = solve(e);
+
+        for (int j = 0; j < n; ++j) {
+            Ainv(j, i) = x[j];
+        }
+    }
+
+    return Ainv;
+}
+
 const Matrix& QR::getQ() const {
     return Q;
 }
