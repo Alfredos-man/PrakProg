@@ -72,32 +72,54 @@ EVD::EVD(const Matrix& Ain, double tol, int maxSweeps)
 
         for (int p = 0; p < n - 1; ++p) {
             for (int q = p + 1; q < n; ++q) {
-
                 double apq = A(p,q);
                 if (std::abs(apq) < tol) continue;
 
                 double app = A(p,p);
                 double aqq = A(q,q);
 
-                double theta = 0.5 * std::atan2(2.0*apq, aqq - app);
+                double tau = (aqq - app) / (2.0 * apq);
+                double t;
 
-                double c = std::cos(theta);
-                double s = std::sin(theta);
+                if (tau >= 0.0)
+                    t = 1.0 / (tau + std::sqrt(1.0 + tau * tau));
+                else
+                    t = -1.0 / (-tau + std::sqrt(1.0 + tau * tau));
 
-                double new_app = c*c*app - 2*s*c*apq + s*s*aqq;
-                double new_aqq = s*s*app + 2*s*c*apq + c*c*aqq;
+                double c = 1.0 / std::sqrt(1.0 + t * t);
+                double s = t * c;
 
-                if (std::abs(new_app - app) > tol || std::abs(new_aqq - aqq) > tol) {
+                // opdater A symmetrisk
+                for (int i = 0; i < n; ++i) {
+                    if (i != p && i != q) {
+                        double aip = A(i,p);
+                        double aiq = A(i,q);
 
-                    changed = true;
+                        A(i,p) = c * aip - s * aiq;
+                        A(p,i) = A(i,p);
 
-                    timesJ(A, p, q, theta);   // A ← A J
-                    Jtimes(A, p, q, theta);   // A ← Jᵀ A
-                    timesJ(V, p, q, theta);   // V ← V J
-
-                    A(p,q) = 0.0;
-                    A(q,p) = 0.0;
+                        A(i,q) = c * aiq + s * aip;
+                        A(q,i) = A(i,q);
+                    }
                 }
+
+                double new_app = c*c*app - 2.0*c*s*apq + s*s*aqq;
+                double new_aqq = s*s*app + 2.0*c*s*apq + c*c*aqq;
+
+                A(p,p) = new_app;
+                A(q,q) = new_aqq;
+                A(p,q) = 0.0;
+                A(q,p) = 0.0;
+
+                // opdater egenvektorer
+                for (int i = 0; i < n; ++i) {
+                    double vip = V(i,p);
+                    double viq = V(i,q);
+                    V(i,p) = c * vip - s * viq;
+                    V(i,q) = s * vip + c * viq;
+                }
+
+                changed = true;
             }
         }
 

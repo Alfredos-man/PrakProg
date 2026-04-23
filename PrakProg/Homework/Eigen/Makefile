@@ -5,7 +5,7 @@ TARGET = program
 SRC = main.cpp jakobi.cpp
 
 RMAX = 10
-DR = 0.2
+DR = 0.05
 
 all: plot
 
