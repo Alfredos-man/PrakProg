@@ -6,7 +6,7 @@ set xlabel 'r'
 set ylabel 'u(r)'
 set grid
 set key top right
-set xrange [0:5]
+set xrange [0:10]
 
 plot 'out.dat' using 1:2 with lines lw 3 dt 1 title 'numerical 1s', \
      'out.dat' using 1:3 with lines lw 3 dt 2 title 'analytical 1s', \

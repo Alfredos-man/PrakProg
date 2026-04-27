@@ -129,6 +129,22 @@ double u3s(double r) {
 }
 
 int main(int argc, char** argv) {
+
+        if (argc == 3 && std::string(argv[1]) == "-time") {
+        int n = std::atoi(argv[2]);
+
+        if (n <= 0) {
+            std::cerr << "n skal vaere positiv\n";
+            return 1;
+        }
+
+        Matrix A = random_symmetric_matrix(n);
+        EVD evd(A);
+        A.print();
+        return 0;
+    }
+
+
     if (argc == 3) {
         try {
             double rmax = std::atof(argv[1]);
@@ -279,4 +295,7 @@ int main(int argc, char** argv) {
         std::cerr << "Brug: ./program rmax dr\n";
         return 1;
     }
+    
+
+
 }
