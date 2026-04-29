@@ -1,9 +1,10 @@
 #include "lsfit.h"
 #include "QR.h"
+#include <tuple>
 
 namespace la {
 
-Vector lsfit(
+std::tuple<Vector, Matrix> lsfit(
     const std::vector<Func>& fs,
     const Vector& x,
     const Vector& y,
@@ -23,7 +24,13 @@ Vector lsfit(
     }
 
     QR qr(A);
-    return qr.solve(b);
+    Vector c = qr.solve(b);
+
+    Matrix AtA = transpose(A) * A;
+    QR qr_cov(AtA);
+    Matrix cov = qr_cov.inverse();
+
+    return {c, cov};
 }
 
 }

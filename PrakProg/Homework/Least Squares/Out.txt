@@ -1,0 +1,14 @@
+ln(a)   = 4.95866
+a       = 142.404
+slope   = -0.170624
+lambda  = 0.170624
+T_1/2   = 4.06242 days
+T_1/2 = 4.06242 days
+Covariance matrix:
+[
+ 0.0012533 -0.000197055 
+-0.000197055 5.12172e-05 
+]
+Det betyder at usikkerhederne er:
+Ln(a): 0.0354019
+Slope: 0.00715662

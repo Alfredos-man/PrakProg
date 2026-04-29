@@ -1,13 +1,15 @@
 #pragma once
-#include <functional>
-#include <vector>
 
+#include <vector>
+#include <functional>
+#include <tuple>
+#include "matrix.h"
 
 namespace la {
 
 using Func = std::function<double(double)>;
 
-Vector lsfit(
+std::tuple<Vector, Matrix> lsfit(
     const std::vector<Func>& fs,
     const Vector& x,
     const Vector& y,

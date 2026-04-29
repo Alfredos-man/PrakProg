@@ -105,7 +105,7 @@ struct Matrix {
     }
 
     void print() const {
-    std::cout<<"Start"<<std::endl;
+    std::cout<<"["<<std::endl;
     double eps = 1e-12;
     for(int i = 0; i < rows(); ++i){
         for(int j = 0; j < cols(); ++j){
@@ -115,7 +115,7 @@ struct Matrix {
         }
         std::cout << "\n";
     }
-    std::cout<<"Slut"<<std::endl;
+    std::cout<<"]"<<std::endl;
 }
 
 
