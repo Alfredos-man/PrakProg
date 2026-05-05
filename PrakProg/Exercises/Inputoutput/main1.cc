@@ -7,11 +7,11 @@
 
 int main(){
     double x;
-    std:: << "x: sin(x): cos(x):"
+    std::cout << "x: sin(x): cos(x):" << std::endl;
     while (std::cin >> x){
         std::cout << x <<" "<< std::sin(x)<<" "<< std::cos(x) << std::endl;
     }
 
 
-    return 0
+    return 0;
 }

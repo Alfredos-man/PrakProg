@@ -1,2 +1,7 @@
 #pragma once
-namespace sfuns{double fgamma(double x);}
+namespace sfuns{
+    
+double fgamma(double x);
+double lngamma(double x);
+
+}

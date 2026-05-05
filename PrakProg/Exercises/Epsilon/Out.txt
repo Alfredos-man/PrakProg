@@ -6,3 +6,18 @@ long double eps=2.22045e-16
 2.22045e-16
 De stemmer overens
 ______________________________________________________________________
+Opgave 2
+a==b ? false
+a>1  ? false
+b>1  ? true
+tiny=0.00000000000000011
+1+tiny+tiny=1.00000000000000000
+tiny+tiny+1=1.00000000000000022
+Forskellen opstår, fordi floating point-tal afrundes efter hver operation. Når tiny lægges til 1, er det for lille til at ændre værdien, og resultatet forbliver 1. Men når tiny + tiny først beregnes, bliver resultatet epsilon, som er stort nok til at ændre 1. Derfor afhænger resultatet af rækkefølgen, og addition er ikke associativ i floating point aritmetik.
+______________________________________________________________________
+Opgave 3
+d1 == d2 ? false
+approx(d1,d2) ? true
+d1 = 0.79999999999999993
+d2 = 0.80000000000000004
+difference = 0.00000000000000011
