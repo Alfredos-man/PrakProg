@@ -3,6 +3,7 @@
 #include <cmath>
 #include <iomanip>
 #include <string>
+#include "cubespline.h"
 #include "quadspline.h"
 #include "interp.h"
 
@@ -65,13 +66,30 @@ int main(int argc, char** argv) {
     return 0;
 }
 
+if (arg == "-opgaveC") {
+    std::vector<double> x, y;
+
+    for (double xi = 0; xi <= 9.0; xi += 0.5) {
+        x.push_back(xi);
+        y.push_back(std::cos(xi));
+    }
+
+    cspline c(x, y);
+
+    std::cout << std::fixed << std::setprecision(8);
+
+    for (double z = x.front(); z <= x.back(); z += 0.02) {
+        std::cout << z << " "
+                  << std::cos(z) << " "
+                  << c.eval(z) << " "
+                  << c.deriv(z) << " "
+                  << c.integ(z) << "\n";
+    }
+
+    return 0;
+}
+
+
 
 return 0;
-
-
-
-
-
-
-
 }
