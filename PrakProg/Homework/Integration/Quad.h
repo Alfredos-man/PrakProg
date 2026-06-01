@@ -11,6 +11,6 @@ namespace Quad {
         double acc = 1e-6,
         double eps = 1e-6
     );
-
+    
     double erf(double z, double acc = 1e-6, double eps = 1e-6);
 }

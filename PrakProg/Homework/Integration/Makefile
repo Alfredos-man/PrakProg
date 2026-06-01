@@ -10,5 +10,17 @@ main.o: main.cpp Quad.h
 Quad.o: Quad.cpp Quad.h
 	$(CXX) $(CXXFLAGS) -c Quad.cpp
 
+
+plot.png: erf_accuracy.txt
+	gnuplot -e "\
+	set terminal png size 800,600; \
+	set output 'plot.png'; \
+	set logscale xy; \
+	set xlabel 'acc'; \
+	set ylabel '|erf(1)-exact|'; \
+	set title 'Adaptive quadrature accuracy'; \
+	set grid; \
+	plot 'erf_accuracy.txt' using 1:2 with linespoints"
+
 clean:
 	rm -f *.o main

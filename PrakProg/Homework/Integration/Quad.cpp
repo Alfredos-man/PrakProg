@@ -54,6 +54,8 @@ double integrate(Func f, double a, double b, double acc, double eps) {
     return adapt(f, a, b, acc, eps, nan, nan, 100000);
 }
 
+
+
 double erf(double z, double acc, double eps) {
     const double sqrt_pi = std::sqrt(M_PI);
 

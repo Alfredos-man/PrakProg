@@ -2,6 +2,7 @@
 #include <iostream>
 #include <cmath>
 #include <iomanip>
+#include <fstream>
 
 int main() {
     std::cout << std::setprecision(16);
@@ -46,6 +47,19 @@ int main() {
         double y = Quad::erf(1.0, a, 0.0);
         std::cout << a << " " << std::abs(y - exact_erf1) << "\n";
     }
+
+
+    double exact = 0.84270079294971486934;
+
+    std::ofstream out("erf_accuracy.txt");
+
+    for (double acc = 1e-1; acc >= 1e-12; acc /= 10.0) {
+        double y = Quad::erf(1.0, acc, 0.0);
+        double err = std::abs(y - exact);
+
+    out << acc << " " << err << "\n";
+    }
+
 
     return 0;
 }
