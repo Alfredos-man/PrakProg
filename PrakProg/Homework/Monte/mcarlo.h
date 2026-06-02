@@ -23,4 +23,24 @@ std::pair<double, double> plainMC(
     LCG& rng
 );
 
+// opgave B
+double corput(int n, int base);
+
+std::vector<double> haltonPoint(int n);
+
+std::pair<double,double> quasiMC(
+    const std::function<double(const std::vector<double>&)>& f,
+    const std::vector<double>& lower,
+    const std::vector<double>& upper,
+    int N
+);
+
+
+std::pair<double,double> stdMC(
+    const std::function<double(const std::vector<double>&)>& f,
+    const std::vector<double>& lower,
+    const std::vector<double>& upper,
+    int N
+);
+
 #endif

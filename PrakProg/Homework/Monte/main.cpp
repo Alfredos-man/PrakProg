@@ -4,6 +4,7 @@
 #include <cmath>
 #include <fstream>
 #include <string>
+#include <random>
 
 void runCircle() {
     auto circle = [](const std::vector<double>& x) {
@@ -74,7 +75,66 @@ void makePlotDataA() {
             << estimated_error << " "
             << actual_error << "\n";
     }
+
 }
+
+void runQuasi() {
+    auto smooth3D = [](const std::vector<double>& x) {
+        return x[0] * x[1] * x[2];
+    };
+
+    std::vector<double> lower = {0.0, 0.0, 0.0};
+    std::vector<double> upper = {1.0, 1.0, 1.0};
+
+    int N = 100000;
+
+    auto [result, error] = quasiMC(smooth3D, lower, upper, N);
+
+    double exact = 1.0 / 8.0;
+
+    std::cout << "Quasi-MC result: " << result << "\n";
+    std::cout << "Exact result:    " << exact << "\n";
+    std::cout << "Actual error:    " << std::abs(result - exact) << "\n";
+}
+
+void compare() {
+    auto difficult = [](const std::vector<double>& u) {
+        double x = M_PI * u[0];
+        double y = M_PI * u[1];
+        double z = M_PI * u[2];
+
+        return 1.0 / (1.0 - std::cos(x) * std::cos(y) * std::cos(z));
+    };
+
+    std::vector<double> lower = {0.0, 0.0, 0.0};
+    std::vector<double> upper = {1.0, 1.0, 1.0};
+
+    int N = 100000;
+    double exact = 1.3932039296856768591842462603255;
+
+    LCG rng(12345);
+    auto [lcgResult, lcgError] = plainMC(difficult, lower, upper, N, rng);
+
+    auto [stdResult, stdError] = stdMC(difficult, lower, upper, N);
+
+    auto [quasiResult, quasiError] = quasiMC(difficult, lower, upper, N);
+
+    std::cout << "Difficult integral comparison, N = " << N << "\n\n";
+
+    std::cout << "LCG result:        " << lcgResult << "\n";
+    std::cout << "LCG estimated err: " << lcgError << "\n";
+    std::cout << "LCG actual err:    " << std::abs(lcgResult - exact) << "\n\n";
+
+    std::cout << "std::mt19937 result:        " << stdResult << "\n";
+    std::cout << "std::mt19937 estimated err: " << stdError << "\n";
+    std::cout << "std::mt19937 actual err:    " << std::abs(stdResult - exact) << "\n\n";
+
+    std::cout << "Halton result:     " << quasiResult << "\n";
+    std::cout << "Halton actual err: " << std::abs(quasiResult - exact) << "\n\n";
+
+    std::cout << "Exact value:       " << exact << "\n";
+}
+
 
 int main(int argc, char** argv) {
     if (argc < 2) {
@@ -102,6 +162,13 @@ int main(int argc, char** argv) {
         std::cout << "\n";
         runEllipsoid();
         makePlotDataA();
+        runQuasi();
+    }
+    else if (arg == "-quasi"){
+        runQuasi();
+    }
+    else if (arg == "-compare"){
+        compare();
     }
     else {
         std::cout << "Unknown argument: " << arg << "\n";
