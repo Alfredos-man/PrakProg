@@ -1,0 +1,27 @@
+Rosenbrock:
+x = [ 1 1 ]
+f(x) = 0
+iterations = 7
+converged = 1
+
+Himmelblau:
+x = [ 3 2 ]
+f(x) = 0
+iterations = 0
+converged = 1
+
+x = [ -2.80512 3.13131 ]
+f(x) = 0
+iterations = 4
+converged = 1
+
+x = [ -3.77931 -3.28319 ]
+f(x) = 2.22585e-23
+iterations = 4
+converged = 1
+
+x = [ 3.58443 -1.84813 ]
+f(x) = 2.39276e-24
+iterations = 4
+converged = 1
+
