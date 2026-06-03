@@ -9,7 +9,7 @@ Ann::Ann(int n) : n(n), a(n), b(n), w(n) {
         w[i] = 0.1;
     }
 }
-
+/*
 double Ann::f(double z) const {
     return std::cos(5.0 * z) * std::exp(-z * z);
 }
@@ -18,7 +18,7 @@ double Ann::df(double z) const {
     return std::exp(-z * z) *
            (-5.0 * std::sin(5.0 * z) - 2.0 * z * std::cos(5.0 * z));
 }
-
+*/
 double Ann::response(double x) const {
     double sum = 0.0;
 
@@ -84,3 +84,56 @@ void Ann::train(const std::vector<double>& xs,
         }
     }
 }
+
+    //opgave B
+
+    
+double Ann::f(double z) const {
+    return z * std::exp(-z*z);
+}
+
+double Ann::df(double z) const {
+    return (1.0 - 2.0*z*z) * std::exp(-z*z);
+}
+
+double Ann::ddf(double z) const {
+    return (4.0*z*z*z - 6.0*z) * std::exp(-z*z);
+}
+
+double Ann::Fint(double z) const {
+    return -0.5 * std::exp(-z*z);
+}
+
+double Ann::dresponse(double x) const {
+    double sum = 0.0;
+
+    for (int i = 0; i < n; i++) {
+        double z = (x - a[i]) / b[i];
+        sum += w[i] * df(z) / b[i];
+    }
+
+    return sum;
+}
+
+double Ann::ddresponse(double x) const {
+    double sum = 0.0;
+
+    for (int i = 0; i < n; i++) {
+        double z = (x - a[i]) / b[i];
+        sum += w[i] * ddf(z) / (b[i] * b[i]);
+    }
+
+    return sum;
+}
+
+double Ann::antiDerivative(double x) const {
+    double sum = 0.0;
+
+    for (int i = 0; i < n; i++) {
+        double z = (x - a[i]) / b[i];
+        sum += w[i] * b[i] * Fint(z);
+    }
+
+    return sum;
+}
+

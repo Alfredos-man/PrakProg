@@ -4,45 +4,44 @@
 #include <cmath>
 
 double g(double x) {
-    return x*x; //activation function (Den vi ville finde)
+    return std::cos(5*x - 1) * std::exp(-x*x);
+}
+
+double dg(double x) {
+    return std::exp(-x*x) *
+           (-5*std::sin(5*x - 1) - 2*x*std::cos(5*x - 1));
 }
 
 int main() {
-
-    // Træningsdata
-    std::vector<double> xs;
-    std::vector<double> ys;
+    std::vector<double> xs, ys;
 
     int N = 50;
 
     for (int i = 0; i < N; i++) {
-        double x = -1.0 + 2.0*i/(N-1);
+        double x = -1.0 + 2.0*i/(N - 1.0);
         xs.push_back(x);
         ys.push_back(g(x));
     }
 
-    // Opret netværk med 10 hidden neuroner
-    Ann net(10);
+    Ann net(15);
 
-    std::cout << "Initial cost = "
-              << net.cost(xs, ys)
-              << std::endl;
+    std::cerr << "Initial cost = " << net.cost(xs, ys) << "\n";
 
-    // Træn
-    net.train(xs, ys, 10000, 0.001);
+    net.train(xs, ys, 50000, 0.0001);
 
-    std::cout << "Final cost = "
-              << net.cost(xs, ys)
-              << std::endl;
+    std::cerr << "Final cost = " << net.cost(xs, ys) << "\n";
 
-    // Udskriv sammenligning
-    std::cout << "\n# x  exact  network\n";
+    std::cout << "# x g(x) ANN g'(x) ANN'(x) ANN''(x) antiANN(x)\n";
 
-    for (double x = -1.0; x <= 5.0; x += 0.1) {
+    for (double x = -1.0; x <= 1.0001; x += 0.05) {
         std::cout
             << x << " "
             << g(x) << " "
-            << net.response(x)
+            << net.response(x) << " "
+            << dg(x) << " "
+            << net.dresponse(x) << " "
+            << net.ddresponse(x) << " "
+            << net.antiDerivative(x)
             << "\n";
     }
 

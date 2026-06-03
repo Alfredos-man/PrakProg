@@ -10,6 +10,7 @@ struct Ann {
 
     double f(double z) const;
     double df(double z) const;
+    double ddf(double z) const;
 
     double response(double x) const;
     double cost(const std::vector<double>& xs,
@@ -19,4 +20,9 @@ struct Ann {
                const std::vector<double>& ys,
                int steps = 10000,
                double eta = 0.001);
+    
+    double Fint(double z) const;
+    double dresponse(double x) const;
+    double ddresponse(double x) const;
+    double antiDerivative(double x) const;
 };
