@@ -1,0 +1,11 @@
+Rosenbrock:
+Converged: 1
+Iterations: 20
+Minimum at: [ 0.999951 0.999902 ]
+f(x) = 2.38919e-09
+
+Himmelblau:
+Converged: 1
+Iterations: 5
+Minimum at: [ 3 2 ]
+f(x) = 1.42404e-13

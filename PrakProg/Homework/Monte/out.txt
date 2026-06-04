@@ -1,0 +1,12 @@
+Unit circle area estimate: 3.13324
+Estimated error: 0.0052113
+Exact value pi: 3.14159
+Actual error: 0.00835265
+
+Ellipsoid volume estimate: 25.0867
+Estimated error: 0.0758168
+Exact volume: 25.1327
+Actual error: 0.0460212
+Quasi-MC result: 0.124983
+Exact result:    0.125
+Actual error:    1.71379e-05
