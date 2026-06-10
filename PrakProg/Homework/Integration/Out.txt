@@ -1,36 +1,65 @@
-int_0^1 sqrt(x) dx
-result = 0.6666666796852266
+===== ORDINARY INTEGRATOR TEST =====
+
+Integral[0,1] x^2 dx
+result = 0.3333333333333334
+exact  = 0.3333333333333333
+error  = 5.551115123125783e-17
+calls  = 256
+
+===== CLENSHAW-CURTIS TESTS =====
+
+Integral[0,1] sqrt(x) dx
+result = 0.6666668380254832
 exact  = 0.6666666666666666
-error  = 1.301856000779367e-08
+error  = 1.713588165808133e-07
+calls  = 436
 
-int_0^1 1/sqrt(x) dx
-result = 1.999999998949156
+Integral[0,1] 1/sqrt(x) dx
+result = 1.99999999993764
 exact  = 2
-error  = 1.050843856376105e-09
+error  = 6.235989502556549e-11
+calls  = 352
 
-int_0^1 4*sqrt(1-x*x) dx
-result = 3.141592657691772
+Integral[0,1] 4*sqrt(1-x*x) dx
+result = 3.141592653555239
 exact  = 3.141592653589793
-error  = 4.101979200754613e-09
+error  = 3.455369324001367e-11
+calls  = 856
 
-int_0^1 log(x)/sqrt(x) dx
-result = -3.999999999413053
-exact  = -4
-error  = 5.869473795883096e-10
+Integral[0,1] log(x)/sqrt(x) dx
+FAILED: Maximum recursion depth reached
+calls before fail = 21958
+
+===== INFINITE LIMIT TESTS =====
+
+Integral[0,infinity] exp(-x) dx
+result = 0.9999999880006718
+exact  = 1
+error  = 1.199932819773153e-08
+calls  = 540
+
+Integral[0,infinity] 1/(1+x*x) dx
+result = 1.57079633111727
+exact  = 1.570796326794897
+error  = 4.322373792220446e-09
+calls  = 584
+
+Integral[-infinity,infinity] exp(-x*x) dx
+result = 1.77245382993893
+exact  = 1.772453850905516
+error  = 2.096658624495262e-08
+calls  = 1128
+
+Integral[-infinity,infinity] 1/(1+x*x) dx
+result = 3.141592893443865
+exact  = 3.141592653589793
+error  = 2.398540721593179e-07
+calls  = 936
+
+===== ERF TEST =====
 
 erf(1)
 result = 0.8427007941926112
 exact  = 0.8427007929497149
 error  = 1.2428963414024e-09
 
-# acc error
-0.1 0.0001904253056616012
-0.01 0.0001904253056616012
-0.001 2.916553748377737e-05
-0.0001 4.29557691195015e-07
-1e-05 2.822738143226644e-08
-1e-06 1.249646053302911e-09
-1e-07 3.842259843622742e-11
-1.000000000000001e-08 2.131628207280301e-12
-1e-09 7.460698725481052e-14
-1.000000000000001e-10 2.720046410331634e-14
