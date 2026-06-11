@@ -45,18 +45,45 @@ Matrix hessian(
     int n = x.size();
     Matrix H(n, n);
 
-    Vector gx = gradient(phi, x);
     Vector xp = x;
+    Vector xm = x;
 
-    for (int j = 0; j < n; ++j) {
-        double dxj = (1.0 + std::abs(x[j])) * std::pow(2.0, -13);
+    double phix = phi(x);
 
-        xp[j] += dxj;
-        Vector dg = gradient(phi, xp) - gx;
-        xp[j] -= dxj;
+    for (int i = 0; i < n; ++i) {
+        double dxi = (1.0 + std::abs(x[i])) * std::pow(2.0, -17);
 
-        for (int i = 0; i < n; ++i) {
-            H(i, j) = dg[i] / dxj;
+        xp[i] += dxi;
+        xm[i] -= dxi;
+
+        H(i, i) = (phi(xp) - 2.0 * phix + phi(xm)) / (dxi * dxi);
+
+        xp[i] -= dxi;
+        xm[i] += dxi;
+    }
+
+    for (int i = 0; i < n; ++i) {
+        double dxi = (1.0 + std::abs(x[i])) * std::pow(2.0, -17);
+
+        for (int j = i + 1; j < n; ++j) {
+            double dxj = (1.0 + std::abs(x[j])) * std::pow(2.0, -17);
+
+            Vector xpp = x;
+            Vector xpm = x;
+            Vector xmp = x;
+            Vector xmm = x;
+
+            xpp[i] += dxi; xpp[j] += dxj;
+            xpm[i] += dxi; xpm[j] -= dxj;
+            xmp[i] -= dxi; xmp[j] += dxj;
+            xmm[i] -= dxi; xmm[j] -= dxj;
+
+            double Hij =
+                (phi(xpp) - phi(xpm) - phi(xmp) + phi(xmm))
+                / (4.0 * dxi * dxj);
+
+            H(i, j) = Hij;
+            H(j, i) = Hij;
         }
     }
 
@@ -70,15 +97,19 @@ Vector gradient(
     int n = x.size();
     Vector g(n);
 
-    double phix = phi(x);
     Vector xp = x;
+    Vector xm = x;
 
     for (int i = 0; i < n; ++i) {
-        double dxi = (1.0 + std::abs(x[i])) * std::pow(2.0, -26);
+        double dxi = (1.0 + std::abs(x[i])) * std::pow(2.0, -17);
 
         xp[i] += dxi;
-        g[i] = (phi(xp) - phix) / dxi;
+        xm[i] -= dxi;
+
+        g[i] = (phi(xp) - phi(xm)) / (2.0 * dxi);
+
         xp[i] -= dxi;
+        xm[i] += dxi;
     }
 
     return g;
