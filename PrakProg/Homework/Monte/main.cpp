@@ -65,7 +65,7 @@ void makePlotDataA() {
 
     std::ofstream out("opgAplot.data");
 
-    for (int N = 100; N <= 100000; N *= 2) {
+    for (int N = 100; N <= 1000000; N *= 2) {
         LCG rng(12345);
 
         auto [area, estimated_error] = plainMC(circle, lower2, upper2, N, rng);
@@ -76,6 +76,40 @@ void makePlotDataA() {
             << actual_error << "\n";
     }
 
+}
+
+void makePlotDataB() {
+
+    auto difficult = [](const std::vector<double>& u) {
+        double x = M_PI*u[0];
+        double y = M_PI*u[1];
+        double z = M_PI*u[2];
+
+        return 1.0 /
+            (1.0 - std::cos(x)*std::cos(y)*std::cos(z));
+    };
+
+    std::vector<double> lower = {0.0,0.0,0.0};
+    std::vector<double> upper = {1.0,1.0,1.0};
+
+    double exact = 1.3932039296856768591842462603255;
+
+    std::ofstream out("opgBplot.data");
+
+    for (int N = 100; N <= 100000; N *= 2) {
+
+        LCG rng(12345);
+
+        auto [lcg, lcgErr] = plainMC(difficult, lower, upper, N, rng);
+        auto [stdmc, stdErr] = stdMC(difficult, lower, upper, N);
+        auto [halton, quasiErr] = quasiMC(difficult, lower, upper, N);
+
+        out << N << " "
+            << std::abs(lcg - exact) << " "
+            << std::abs(stdmc - exact) << " "
+            << std::abs(halton - exact)
+            << "\n";
+    }
 }
 
 void runQuasi() {
@@ -135,14 +169,17 @@ void compare() {
     std::cout << "Exact value:       " << exact << "\n";
 }
 
-
 int main(int argc, char** argv) {
+
     if (argc < 2) {
-        std::cout << "Use:\n";
-        std::cout << "./montecarlo circle\n";
-        std::cout << "./montecarlo ellipsoid\n";
-        std::cout << "./montecarlo plotA\n";
-        std::cout << "./montecarlo all\n";
+        std::cout << "Usage:\n";
+        std::cout << "./main -circle\n";
+        std::cout << "./main -ellipsoid\n";
+        std::cout << "./main -plotA\n";
+        std::cout << "./main -quasi\n";
+        std::cout << "./main -compare\n";
+        std::cout << "./main -plotB\n";
+        std::cout << "./main -all\n";
         return 1;
     }
 
@@ -157,18 +194,30 @@ int main(int argc, char** argv) {
     else if (arg == "-plotA") {
         makePlotDataA();
     }
+    else if (arg == "-quasi") {
+        runQuasi();
+    }
+    else if (arg == "-compare") {
+        compare();
+    }
+    else if (arg == "-plotB") {
+        makePlotDataB();
+    }
     else if (arg == "-all") {
+
         runCircle();
         std::cout << "\n";
+
         runEllipsoid();
-        makePlotDataA();
+        std::cout << "\n";
+
         runQuasi();
-    }
-    else if (arg == "-quasi"){
-        runQuasi();
-    }
-    else if (arg == "-compare"){
+        std::cout << "\n";
+
         compare();
+
+        makePlotDataA();
+        makePlotDataB();
     }
     else {
         std::cout << "Unknown argument: " << arg << "\n";
@@ -176,4 +225,5 @@ int main(int argc, char** argv) {
     }
 
     return 0;
+
 }

@@ -7,6 +7,22 @@ Ellipsoid volume estimate: 25.0867
 Estimated error: 0.0758168
 Exact volume: 25.1327
 Actual error: 0.0460212
+
 Quasi-MC result: 0.124983
 Exact result:    0.125
 Actual error:    1.71379e-05
+
+Difficult integral comparison, N = 100000
+
+LCG result:        1.40477
+LCG estimated err: 0.0193479
+LCG actual err:    0.0115692
+
+std::mt19937 result:        1.45471
+std::mt19937 estimated err: 0.0424035
+std::mt19937 actual err:    0.0615067
+
+Halton result:     1.37921
+Halton actual err: 0.0139982
+
+Exact value:       1.3932
