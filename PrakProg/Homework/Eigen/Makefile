@@ -38,7 +38,5 @@ plot: out.dat opgaveB.gnu
 	rm out.dat
 
 
-
-
 clean:
 	rm -f $(TARGET) out.dat wave.png out.txt times.out opgaveC.png

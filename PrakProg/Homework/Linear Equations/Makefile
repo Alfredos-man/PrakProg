@@ -13,7 +13,7 @@ main: $(OBJS)
 times.out: main
 	@tmp=$@.tmp; \
 	rm -f $$tmp; \
-	for N in $$(seq 100 20 1500); do \
+	for N in $$(seq 100 20 1300); do \
 		T=$$({ /usr/bin/time -p ./main $$N > /dev/null; } 2>&1 | awk '/^real/ {print $$2}'); \
 		echo "$$N $$T" >> $$tmp; \
 	done; \
@@ -33,10 +33,10 @@ plot.png: times.out
 	"
 
 out.txt: main
-	./main > out.txt
+	./main > Out.txt
 
 main.o: main.cc matrix.h QR.h
 QR.o: QR.cc QR.h matrix.h
 
 clean:
-	rm -f main *.o times.out fit.log out
+	rm -f main *.o times.out fit.log out plot.png out.txt
