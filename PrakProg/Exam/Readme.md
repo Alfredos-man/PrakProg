@@ -73,5 +73,14 @@ The rank-1 eigenvalue algoritm has been implimented as acording to the task and 
 
 score: 10/10
 
+## AI Decleration: (Can also be found in "Extramateriale" on wiseflow)
+AI dekleration: 
+ChatGPT has been used to generate big parts of the code in the following files:
+rank.h
+rank.cpp
+main.cpp
+in the Makefile, ChatGPT has been used to make the ”plot:” rule
+
+
 
 
